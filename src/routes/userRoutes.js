@@ -11,7 +11,7 @@ const UserProfile = require('../models/UserProfile');
 const UserPreferences = require('../models/UserPreferences');
 
 // Import controllers
-const UserController = require('../controllers/UserController');
+const UserController = require('../controllers/userController');
 
 // Public routes (called by auth service)
 router.post('/create', validate(createUserSchema), UserController.createUser);

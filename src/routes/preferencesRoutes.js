@@ -6,7 +6,7 @@ const { verifyToken, requireSelfAccess } = require('../middleware/auth');
 const { validate, userPreferencesSchema } = require('../middleware/validation');
 
 // Import controllers
-const PreferencesController = require('../controllers/PreferencesController');
+const PreferencesController = require('../controllers/preferencesController');
 
 // All routes require authentication
 router.use(verifyToken);
