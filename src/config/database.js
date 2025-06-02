@@ -7,6 +7,7 @@ const pool = new Pool({
   user: process.env.DB_USER || 'mindnest_user',
   password: process.env.DB_PASSWORD || 'mindnest_password',
   database: process.env.DB_NAME || 'mindnest_users',
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
   max: 20,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
