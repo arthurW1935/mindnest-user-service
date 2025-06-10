@@ -25,6 +25,9 @@ router.get('/me', UserController.getCurrentUser);
 // Get user by ID (self-access or psychiatrist)
 router.get('/:id', requireSelfAccess, UserController.getUserById);
 
+// Get user by ID (self-access or psychiatrist)
+router.get('/auth/:id', requireSelfAccess, UserController.getUserByAuthId);
+
 // Update current user
 router.put('/me', UserController.updateCurrentUser);
 

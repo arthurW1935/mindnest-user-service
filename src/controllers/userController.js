@@ -145,6 +145,51 @@ class UserController {
     }
   }
 
+  static async getUserByAuthId(req, res) {
+    try {
+      const userId = parseInt(req.params.id);
+      const user = await User.findByAuthUserId(userId);
+
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          message: 'User not found'
+        });
+      }
+
+      // Get profile completion percentage
+      const completionPercentage = await UserProfile.getCompletionPercentage(user.id);
+
+      res.json({
+        success: true,
+        data: {
+          user: {
+            id: user.id,
+            auth_user_id: user.auth_user_id,
+            email: user.email,
+            role: user.role,
+            is_active: user.is_active,
+            first_name: user.first_name,
+            last_name: user.last_name,
+            profile_picture_url: user.profile_picture_url,
+            theme: user.theme,
+            language: user.language,
+            timezone: user.timezone,
+            profile_completion: completionPercentage,
+            created_at: user.created_at,
+            updated_at: user.updated_at
+          }
+        }
+      });
+    } catch (error) {
+      console.error('Error getting user by ID:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Failed to get user information'
+      });
+    }
+  }
+
   // Update current user basic info
   static async updateCurrentUser(req, res) {
     try {
